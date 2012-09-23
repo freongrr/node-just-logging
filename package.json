@@ -3,9 +3,9 @@
   "name": "just-logging",
   "description": "Simple logging, nothing else.",
   "version": "1.0.0",
-  "homepage": "todo",
+  "homepage": "https://github.com/freongrr/node-just-logging",
   "repository": {
-    "url": "todo"
+    "url": "git://github.com/freongrr/node-just-logging.git"
   },
   "main": "logger.js",
   "dependencies": {},
