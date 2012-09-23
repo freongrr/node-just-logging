@@ -6,6 +6,13 @@ This module provides very simple logging, and nothing else, for nodejs modules.
 There are so many logging framework that it was faster to write one than to find
 the right one for me. Usage and output kind of mimics log4j.
 
+Installation
+------------
+
+Install from npm:
+
+    npm install just-logging
+
 Usage
 -----
 
@@ -68,3 +75,10 @@ Variables allowed in the format string:
 * %L: line number
 
 * %m: message
+
+Contribute
+----------
+
+github repository:
+
+    https://github.com/freongrr/node-just-logging
