@@ -2,7 +2,7 @@
   "author": "Fabien Cortina <fabien.cortina@gmail.com>",
   "name": "just-logging",
   "description": "Simple logging, nothing else.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/freongrr/node-just-logging",
   "repository": {
     "url": "git://github.com/freongrr/node-just-logging.git"
