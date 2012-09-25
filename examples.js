@@ -1,4 +1,4 @@
-var logger = require('just-logging').getLogger('EngineSubSystem');
+var logger = require('./logger.js').getLogger('EngineSubSystem');
 
 // Simple logging:
 function init() {
@@ -15,6 +15,7 @@ function runChecks() {
 // Logging in an anonymous method
 warn = function() {
     var error = new Error('null');
+    logger.debug('The system is about to crash');
     logger.warn('Polarization failure, switching to backup generator', error);
 }
 
@@ -25,6 +26,10 @@ function shutdown() {
 }
 
 init();
+
+// Change the log level
+logger.level = 'INFO';
+
 runChecks();
 warn.call();
 shutdown();

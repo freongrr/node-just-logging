@@ -44,9 +44,17 @@ With the default settings, this outputs the following:
 Configuration
 -------------
 
-### Name
+### Level
 
-    logger.name = 'LOG';
+The minimum level of the messages to log can be changed.
+Levels allowed are `OFF`, `DEBUG`, `INFO`, `WARN`, `ERROR`:
+
+    logger.level = 'WARN';
+
+The level can also be changed for an other logger instance.
+For instance, to reduce or turn off a noisy module:
+
+    logger.getLogger('noisy-module.js').level = 'OFF';
 
 ### Format
 

@@ -1,8 +1,27 @@
 var util = require('util');
 
+var loggers = {};
+
+var levels = {
+    "DEBUG": 40,
+    "INFO": 30,
+    "WARN": 20,
+    "ERROR": 10,
+    "OFF": 0,
+};
+
 exports.getLogger = function (name) {
+    var name = name != undefined ? name : getLoggerName();
+    if (!loggers[name]) {
+        loggers[name] = createLogger(name);
+    }
+    return loggers[name];
+}
+
+function createLogger(name) {
     return {
-        name: name,
+        _name: name,
+        level: "DEBUG",
         format: "[%d{JSON}][%p][%t][%c] %M:%L %m",
 
         debug: function() {
@@ -20,10 +39,27 @@ exports.getLogger = function (name) {
         error: function() {
             doLog(this, "ERROR", arguments, true);
         },
+
+        getLogger: exports.getLogger,
     };
 }
 
+function getLoggerName() {
+    var stacktrace = new Error().stack;
+
+    var callerLine = stacktrace.split("\n")[3];
+    callerLine = callerLine.substr(callerLine.indexOf("at ") + 3, callerLine.length);
+
+    var loggerName = callerLine.substr(callerLine.lastIndexOf("/") + 1);
+    return loggerName.substr(loggerName, loggerName.indexOf(":"));
+}
+
 function doLog(logger, type, args, stderr) {
+    if (!levels[type] || levels[logger.level] < levels[type]) {
+        // Skipping
+        return;
+    }
+
     var stacktrace = new Error().stack;
     var callerLine = stacktrace.split("\n")[3];
 
@@ -31,11 +67,7 @@ function doLog(logger, type, args, stderr) {
 
     var lineNumber = callerLine.split(":")[1];
 
-    var loggerName = logger.name;
-    if (!loggerName) {
-        loggerName = callerLine.substr(callerLine.lastIndexOf("/") + 1);
-        loggerName = loggerName.substr(loggerName, loggerName.indexOf(":"));
-    }
+    var loggerName = logger._name;
 
     var methodName;
     if (callerLine.charAt(0) == "/") {
