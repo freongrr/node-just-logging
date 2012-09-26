@@ -1,6 +1,7 @@
 var util = require('util');
 
-var loggers = {};
+// Use process as it is shared across all modules
+process._just_logging_loggers = {};
 
 var levels = {
     "DEBUG": 40,
@@ -12,10 +13,10 @@ var levels = {
 
 exports.getLogger = function (name) {
     var name = name != undefined ? name : getLoggerName();
-    if (!loggers[name]) {
-        loggers[name] = createLogger(name);
+    if (!process._just_logging_loggers[name]) {
+        process._just_logging_loggers[name] = createLogger(name);
     }
-    return loggers[name];
+    return process._just_logging_loggers[name];
 }
 
 function createLogger(name) {
