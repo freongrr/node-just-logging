@@ -18,11 +18,11 @@ Usage
 
 Get a logger with the default name (the current module filename):
 
-    var logger = require('logger').getLogger();
+    var logger = require('just-logging').getLogger();
 
 Get a module with a specific name:
 
-    var logger = require('logger').getLogger('MY-LOGGER');
+    var logger = require('just-logging').getLogger('MY-LOGGER');
 
 Log messages at different log levels:
 
